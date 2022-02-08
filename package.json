@@ -1,0 +1,13 @@
+{
+  "name": "mini-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bundle.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "build": "node ./bundle.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
