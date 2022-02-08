@@ -13,7 +13,7 @@ const getModuleInfo = file => {
     const ast = paser.parse(content, {
         sourceType: 'module'
     })
-
+    // 这里将此文件里面所有import收集起来
     const deps = {}
     traverse(ast, {
         ImportDeclaration({ node }) {
@@ -63,10 +63,9 @@ const parseModules = file => {
 
 }
 
-// bundle函数
+// 打包函数
 const bundle = file => {
-    const deps = parseModules(file)
-    const depsGraph = JSON.stringify(deps, null, 4)
+    const depsGraph = JSON.stringify(parseModules(file), null, 4)
     fs.writeFile('./file.json', depsGraph, err => { })
     return `(function (graph) {
 
