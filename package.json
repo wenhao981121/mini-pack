@@ -11,7 +11,7 @@
     },
     "devDependencies": {},
     "scripts": {
-        "build": "node ./pack/index.js"
+        "build": "node ./pack/index.js --config ./pack/pack.config.js"
     },
     "author": "",
     "license": "ISC"
