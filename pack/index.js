@@ -4,16 +4,17 @@ const traverse = require('@babel/traverse').default;
 const path = require('path');
 const babel = require('@babel/core');
 
+// const files = fs.readdirSync('./src')
+// console.log(11111111111111,files);
+
 // 获取某个文件的路径，依赖，代码
 const getModuleInfo = file => {
     const content = fs.readFileSync(file, 'utf-8')
     // console.log(content);
-
-
     const ast = paser.parse(content, {
         sourceType: 'module'
     })
-    // 这里将此文件里面所有import收集起来
+    // 这里将此文件里面所有import依赖收集起来
     const deps = {}
     traverse(ast, {
         ImportDeclaration({ node }) {
@@ -26,13 +27,12 @@ const getModuleInfo = file => {
     const { code } = babel.transformFromAst(ast, null, {
         presets: ['@babel/preset-env']
     })
-    //  console.log(code);
+    //console.log(code);
     return {
         file,
         code,
         deps
     }
-
 }
 
 // 递归获取某个文件所有依赖关系，并将所有文件放入数组中
@@ -59,8 +59,6 @@ const parseModules = file => {
         }
     })
     return ob
-
-
 }
 
 // 打包函数
