@@ -1,9 +1,10 @@
 const path = require('path');
-const Pack = require('./main')
+const Pack = require('./pack')
 // const files = fs.readdirSync('./src')
 // console.log(11111111111111,files);
 let configPath = path.resolve(process.cwd(), './pack.config.js')
 const idx = process.argv.indexOf('--config')
+
 if (idx > -1 && process.argv[idx]) {
     configPath = path.resolve(process.cwd(), process.argv[idx + 1])
 }

@@ -1,5 +1,5 @@
 const path = require('path')
-
+const HtmlPlugin = require('./plugin/htmlPlugin')
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -16,5 +16,10 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    plugins: [
+        new HtmlPlugin({
+            template: './src/index.html',
+        })
+    ]
 }

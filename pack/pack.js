@@ -3,9 +3,16 @@ const paser = require('@babel/parser')
 const traverse = require('@babel/traverse').default;
 const path = require('path');
 const babel = require('@babel/core');
+const { SyncHook } = require("tapable");
+
+
 class Pack {
     constructor(config) {
         this.config = config
+        this.hooks = {
+            emit: new SyncHook(),
+            afterEmit: new SyncHook()
+        }
         this.run()
     }
     initLoader(file) {
