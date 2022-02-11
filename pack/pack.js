@@ -13,7 +13,14 @@ class Pack {
             emit: new SyncHook(),
             afterEmit: new SyncHook()
         }
+        this.initPlugin()
         this.run()
+    }
+    initPlugin() {
+        const plugins = this.config.plugins
+        plugins?.forEach(n => {
+            n.apply(this)
+        })
     }
     initLoader(file) {
         let content = fs.readFileSync(file, 'utf-8')
@@ -104,6 +111,7 @@ class Pack {
     }
     run() {
         const content = this.bundle(this.config.entry)
+        this.hooks.emit.call()
         fs.mkdirSync(this.config.output.path, { recursive: true })
         fs.writeFileSync(path.join(this.config.output.path, this.config.output.filename), content)
     }
